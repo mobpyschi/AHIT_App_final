@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Configuration extends Model
 {
     use HasFactory;
-    protected $fillable = ['ipDefaut','name','timeStartCheckin','timeEndCheckin','timeStartCheckout','timeEndCheckout'];
+    protected $fillable = ['ipDefaut','name','timeStartCheckin','timeEndCheckin','timeStartCheckout','timeEndCheckout','formatDate'];
 }

@@ -29,7 +29,7 @@
                                 <li class="nav-item">
                                     <a href="#messages1" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                        <span class="d-none d-sm-block">EMPTY</span>
+                                        <span class="d-none d-sm-block">Date Config</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -105,7 +105,30 @@
                                     </div> <!-- end row -->
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="messages1">
-                                    {{'content in here'}}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-centered mb-0" id="inline-editable">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Current Date Format</th>
+                                                                {{-- <th>Salary</th> --}}
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>{{$timenow}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end .table-responsive-->
+                                                </div> <!-- end card-body -->
+                                            </div> <!-- end card -->
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="settings1">
                                     {{'content in here'}}

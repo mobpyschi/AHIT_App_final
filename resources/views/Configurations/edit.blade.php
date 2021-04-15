@@ -31,7 +31,7 @@
                                 <li class="nav-item">
                                     <a href="#messages1" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                        <span class="d-none d-sm-block">EMPTY</span>
+                                        <span class="d-none d-sm-block">Date config</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -108,13 +108,90 @@
                                     </div> <!-- end row -->
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="messages1">
-                                    {{'content in here'}}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-centered mb-0" id="inline-editable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Current Date Format</th>
+                                                                    <th>Change Date Format</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input value="{{ $timenow }}" type="timezone" id="meeting-time" name="meeting-time" readonly>
+                                                                    </td>
+{{--                                                                    {{ dd($timenow) }}--}}
+                                                                    @if ($stringFormat == "Y/m/d" )
+                                                                        <td>
+                                                                            <br>
+                                                                            <label for="dateFormat">Choose a format Date:</label>
+                                                                            <select name="dateFormat" id="dateFormat">
+                                                                                <option value="m/d/Y">MM/DD/YYYY</option>
+                                                                                <option value="d/m/Y">DD/MM/YYYY</option>
+                                                                                <option value="Y/d/m">YYYY/DD/MM</option>
+                                                                                {{-- <option value="Y/m/d">YYYY/MM/DD</option> --}}
+
+                                                                            </select>
+                                                                        </td>
+                                                                    @endif
+
+                                                                    @if ($stringFormat == "Y/d/m" )
+                                                                        <td>
+                                                                            <br>
+                                                                            <label for="dateFormat">Choose a format Date:</label>
+                                                                            <select name="dateFormat" id="dateFormat">
+                                                                                <option value="m/d/Y">MM/DD/YYYY</option>
+                                                                                <option value="d/m/Y">DD/MM/YYYY</option>
+{{--                                                                                <option value="Y/d/m">YYYY/DD/MM</option>--}}
+                                                                                 <option value="Y/m/d">YYYY/MM/DD</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    @endif
+
+                                                                    @if ($stringFormat == "d/m/Y" )
+                                                                        <td>
+                                                                            <br>
+                                                                            <label for="dateFormat">Choose a format Date:</label>
+                                                                            <select name="dateFormat" id="dateFormat">
+                                                                                <option value="m/d/Y">MM/DD/YYYY</option>
+{{--                                                                                <option value="d/m/Y">DD/MM/YYYY</option>--}}
+                                                                                <option value="Y/d/m">YYYY/DD/MM</option>
+                                                                                 <option value="Y/m/d">YYYY/MM/DD</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    @endif
+
+                                                                    @if ($stringFormat == "m/d/Y" )
+                                                                        <td>
+                                                                            <br>
+                                                                            <label for="dateFormat">Choose a format Date:</label>
+                                                                            <select name="dateFormat" id="dateFormat">
+{{--                                                                                <option value="m/d/Y">MM/DD/YYYY</option>--}}
+                                                                                <option value="d/m/Y">DD/MM/YYYY</option>
+                                                                                <option value="Y/d/m">YYYY/DD/MM</option>
+                                                                                 <option value="Y/m/d">YYYY/MM/DD</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    @endif
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end .table-responsive-->
+                                                </div> <!-- end card-body -->
+                                            </div> <!-- end card -->
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="settings1">
                                     {{'content in here'}}
                                 </div>
-                            </div>
-                        </div><!-- end col -->
+
                         <input type="submit" class="btn btn-primary" value="Save">
                             </form>
                     </div><!-- end row -->

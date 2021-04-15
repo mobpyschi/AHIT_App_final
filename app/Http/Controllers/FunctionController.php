@@ -6,6 +6,7 @@ use App\Models\HistoryChecks;
 use App\Models\User;
 use Auth;
 use Carbon;
+use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Http\Request;
 
 class FunctionController extends Controller
@@ -216,32 +217,74 @@ class FunctionController extends Controller
      */
     public function ConfigIndex()
     {
+
+        $dateFormat = Configuration::first();
+
+        $mytime = Carbon\Carbon::now();
+
+        $timenow = date('d/m/Y',strtotime($mytime->toDateTimeString()));
+        if ($dateFormat->formatDate == 'm/d/Y'){
+            $timenow = date('m/d/Y',strtotime($mytime->toDateTimeString()));
+        }elseif ($dateFormat->formatDate== 'Y/d/m'){
+            $timenow = date('Y/d/m',strtotime($mytime->toDateTimeString()));
+        }elseif ($dateFormat->formatDate== 'Y/m/d'){
+            $timenow = date('Y/m/d',strtotime($mytime->toDateTimeString()));
+        }elseif ($dateFormat->formatDate== 'd/m/Y'){
+            $timenow = date('d/m/Y',strtotime($mytime->toDateTimeString()));
+        }
+
         $configes = Configuration::first();
-        return view('Configurations.index', compact('configes'));
+        return view('Configurations.index', compact('configes','timenow'));
     }
 
     /**
      *
      * COnfig edit View
+     * chú ý với:
+     *          - $dateFormat->formatDate == 1 thì form day là 'm/d/Y'
+     *      *   - $dateFormat->formatDate == 2 thì form day là 'd/m/Y'
+     *          - $dateFormat->formatDate == 3 thì form day là 'Y/d/m'
+     *          - $dateFormat->formatDate == 4 thì form day là 'Y/m/d'
+
      *
      */
-    public function configEdit()
+    public function configEdit(Request $request)
     {
+        $dateFormat = Configuration::first();
+
+
+        $stringFormat = $dateFormat->formatDate;
+        $mytime = Carbon\Carbon::now();
+
+        $timenow = date('d/m/Y',strtotime($mytime->toDateTimeString()));
+        if ($dateFormat->formatDate == 'm/d/Y'){
+            $timenow = date('m/d/Y',strtotime($mytime->toDateTimeString()));
+        }elseif ($dateFormat->formatDate== 'Y/d/m'){
+            $timenow = date('Y/d/m',strtotime($mytime->toDateTimeString()));
+        }elseif ($dateFormat->formatDate== 'Y/m/d'){
+            $timenow = date('Y/m/d',strtotime($mytime->toDateTimeString()));
+        }elseif ($dateFormat->formatDate== 'd/m/Y'){
+            $timenow = date('d/m/Y',strtotime($mytime->toDateTimeString()));
+        }
+
         $configes = Configuration::first();
-        return view('Configurations.edit', compact('configes'));
+        return view('Configurations.edit', compact('stringFormat','timenow','configes'));
     }
 
     /**
      *
-     * COnfig update View
+     * Config update View
      *
      */
     public function configUpdate(Request $request)
     {
-
+        $dateFormat = Configuration::first();
+        $dateFormat->formatDate = $request->input('dateFormat');
+        $dateFormat->save();
         $input = $request->all();
         $confifs = Configuration::first();
         $confifs->update($input);
+
         return redirect('/configurations');
     }
 
