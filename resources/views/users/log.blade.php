@@ -15,10 +15,20 @@
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {{ $user->name }}
+        <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="profile-info-name ">
+                <img src="/images/users/{{Auth::user()->avatar}}" class="rounded-circle avatar-md img-thumbnail float-left " alt="profile-image">
+                
+                <h4 style="padding: 1rem"><strong>Name: {{ ($userDetail->Name) }}</strong></h4>
+              
+                
+            </div>
+            <div class="form-group text-center">
+                
+                
+            </div>
         </div>
+        
     </div>
 </div>
 
@@ -28,7 +38,7 @@
 
             <h4 class="mt-0 header-title"><b>Historylogs Table</b></h4>
             <div class="row">
-                <form action="{{ route('users.stlog', $user->id) }}" method="POST">
+                <form action="{{ route('users.stlog', $user->id) }}" method="GET">
                     @csrf
                     <div class="input-group">
                         <span style="margin:0.5rem">From </span>

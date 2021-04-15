@@ -76,7 +76,7 @@ class Project extends Model
             // inprocess
             {
                 if ($project->end >= now()) {
-                    return $project->update(['status' => 'InProcess']);
+                    return $project->update(['status' => 'InProgress']);
                 }
             }
 

@@ -47,15 +47,16 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('tests', TestController::class);
 
-    Route::get('/profile', [ProfileController::class, 'index']);
-    Route::post('/profile', [ProfileController::class, 'update_avatar']);
+    Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.update');
+    Route::post('/profiles/avt', [ProfileController::class, 'update_avatar']);
+    Route::post('/profiles/update/{id}', [ProfileController::class, 'updateInfo'])->name('updateinfo');
 
     Route::get('/configurations', [FunctionController::class, 'ConfigIndex']);
     Route::get('/configurations/edit', [FunctionController::class, 'configEdit']);
     Route::post('/configurations/update', [FunctionController::class, 'configUpdate']);
 
     Route::get('/users/log/{id}', [UserController::class, 'logUser'])->name('users.log');
-    Route::post('/users/trlog/{id}', [UserController::class, 'storelog'])->name('users.stlog');
+    Route::get('/users/trlog/{id}', [UserController::class, 'storelog'])->name('users.stlog');
 
     Route::post('/tasks/{id}/save', [TaskController::class, 'taskStore']); //->name('tasks.create')
     Route::post('/tasks/{id}/edit', [TaskController::class, 'taskUpdate']);

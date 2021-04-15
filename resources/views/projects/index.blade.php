@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="badge @if ($project->status == 'Done') badge-success
-                    @elseif ($project->status == 'InProcess') badge-primary @else
+                    @elseif ($project->status == 'InProgress') badge-primary @else
                         badge-danger @endif float-right">{{ $project->status }}</div>
                     <h4 class="mt-0"><a href="{{ route('projects.show', $project->id) }}"
                             class="text-dark">{{ $project->name }}</a></h4>

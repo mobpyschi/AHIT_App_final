@@ -79,7 +79,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                {{-- <h4 class="modal-title mt-0"><strong>Add New Event</strong></h4> --}}
+                                <h4 class="modal-title mt-0"><strong>Add New Event</strong></h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body"></div>
@@ -94,6 +94,24 @@
                     </div>
                 </div>
 
+                <div class="modal fade none-border" id="event-update-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title mt-0"><strong>Update Event</strong></h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Save
+                                    event</button>
+                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light"
+                                    data-dismiss="modal">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Modal Add Category -->
                 <div class="modal fade none-border" id="add-category">
                     <div class="modal-dialog">

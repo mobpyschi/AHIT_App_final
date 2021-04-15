@@ -67,6 +67,10 @@ class User extends Authenticatable
         return $this->hasMany(HistoryChecks::class, 'model_id', 'id');
     }
 
+    public function detailUser()
+    {
+        return $this->hasMany(UserDetail::class, 'user_id', 'id');
+    }
     /**
      * The Project that belong to the User
      *
