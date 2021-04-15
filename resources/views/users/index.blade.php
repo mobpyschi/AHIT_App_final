@@ -128,7 +128,7 @@
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                             <a class="btn btn-info"
-                                                href="{{ route('users.show', $user->id) }}">Show</a>
+                                                href="/profile">Show</a>
                                             @can('user-edit')
                                                 <a class="btn btn-primary"
                                                     href="{{ route('users.edit', $user->id) }}">Edit</a>
@@ -201,7 +201,7 @@
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                             <a class="btn btn-info"
-                                                href="{{ route('users.show', $user->id) }}">Show</a>
+                                                href="/profile">Show</a>
                                             @can('user-edit')
                                                 @if ($user->email != 'admin@gmail.com')
                                                 <a class="btn btn-primary"

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\Department;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -80,6 +81,7 @@ class UserController extends Controller
             dd('oke');
         };
         $department_name = $input['department'][0];
+        $role_name = $input['roles'][0];
         $department_id = Department::where('name', $department_name)->first()->id;
         $input['department_id'] = $department_id;
         unset($input['department']);
@@ -91,6 +93,16 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
         if($user->save()){
             // Mail::to($request->email)->send(new CreateUserMail($request));
+            $detailUser = new UserDetail;
+            $detailUser->Name = $input['name'];
+            $detailUser->Email = $input['email'];
+            $detailUser->Department = $department_name;
+            $detailUser->Role = $role_name;
+
+            $detailUser->Work_start = now();
+            $userId = User::all()->max('id');
+            $detailUser->user_id = $userId;
+            $detailUser->save();
             return redirect()->route('users.index')
                         ->with('success','User created successfully and send email success');
         }
@@ -107,10 +119,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $detailUser = UserDetail::where('user_id',$id)->get();
         $histories = $user->history()->paginate(10);
         // $luong = $user->history()->where('created_at',date('Y:m:d H:i:s',strtotime('2021-02-01 10:52:28')))->get();
         // dd($luong,date('d:m:Y',strtotime('01:02:2021')));
-        return view('users.show',compact('user','histories'));
+        return view('users.show',compact('user','histories','detailUser'));
     }
 
     /**
@@ -200,8 +213,10 @@ class UserController extends Controller
     public function logUser($id)
     {
         $user = User::find($id);
+        $userDetail = $user->detailUser()->first();
+        // dd($userDetail );
         $histories = $user->history()->paginate(10);
-        return view('users.log',compact('user', 'histories'))->with('totalWork',0); //compact('user','histories')
+        return view('users.log',compact('user', 'histories','userDetail'))->with('totalWork',0); //compact('user','histories')
     }
 
     /**
@@ -219,7 +234,7 @@ class UserController extends Controller
             'date_end' => 'required',
 
         ]);
-
+            // dd($request);
         $input = $request->all();
         $date_start = $input['date_start'];
         $date_end = $input['date_end'];
@@ -227,11 +242,12 @@ class UserController extends Controller
         $fromDate = $input['date_start'];
         $toDate   = $input['date_end'];
         $user = User::find($id);
+        $userDetail = $user->detailUser()->first();
         $histories = HistoryChecks::whereRaw(
         "(created_at >= ? AND created_at <= ? AND model_id = ?)",
         [$fromDate." 00:00:00", $toDate." 23:59:59", $id]
         )->paginate(10);
 
-        return view('users.log',compact('user','histories'))->with('totalWork',0);
+        return view('users.log',compact('user','histories','userDetail'))->with('totalWork',0);
     }
 }

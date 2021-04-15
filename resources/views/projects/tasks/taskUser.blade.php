@@ -1,6 +1,6 @@
 @section('taskUser')
     <div>
-        <hr style="border: 4px solid red;">
+        <hr style="border: 1px solid red;">
 
         <table class="tablesaw table mb-0" data-tablesaw-sortable data-tablesaw-sortable-switch>
             <thead>
@@ -11,7 +11,7 @@
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Detail</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Start</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">End</th>
-                    <th>stated</th>
+                    <th>Status</th>
                     <th width="280px">Description</th>
                     <th>Process</th>
                     <th>Note (Action for task)</th>

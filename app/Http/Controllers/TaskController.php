@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Status;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+
 
     /**
      * Display the specified resource.
@@ -30,14 +30,7 @@ class TaskController extends Controller
             'end' => 'after:start',
             'assign' => 'required',
         ]);
-        $project = Project::where('id', $id)->first();
-        if($validate['end'] >= $project->end){
-            return redirect()->back()->withErrors('The end date must not be greater than the end date of the project');
-        }
-        if($validate['start'] >= $project->start){
-            return redirect()->back()->withErrors('The start date must not be greater than the project start date');
-        }
-
+        // dd($request->all());
         $input = $request->all();
         // $input['status_id']= 1;
         $input['project_id'] = $id;
@@ -101,7 +94,7 @@ class TaskController extends Controller
         Task::sendNotify($projId, $tasks);
 
         // $tasks->update(['status_id' => 3]);
-        return redirect()->route('projects.show',$tasks->project_id)->with('taskSubmit', 'You already submited ');
+        return redirect()->back()->with('taskSubmit', 'You already submited ');
     }
 
     /**
@@ -147,6 +140,7 @@ class TaskController extends Controller
         $tasksUser = Task::where('id', $id)->first();
         return view('projects.tasks.detailsTask', compact('tasksUser'));
     }
+
 
     /**
      * delete task
