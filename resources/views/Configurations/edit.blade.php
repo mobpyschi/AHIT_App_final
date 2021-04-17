@@ -10,195 +10,187 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card-box">
+                
                     <h4 class="header-title mt-0 mb-3">Configuration</h4>
 
                     <div class="row">
                         <div class="col-xl-12">
-                            <ul class="nav nav-tabs">
+            
+                            <ul class="nav nav-tabs nav-justified">
                                 <li class="nav-item">
-                                    <a href="#time" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                        <span class="d-none d-sm-block">Time config</span>
+                                    <a href="#home2" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                        <span class="d-block d-sm-none"><i class="fas fa-clock"></i></span>
+                                        <span class="d-none d-sm-block">Time Config</span>   
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#ip" data-toggle="tab" aria-expanded="true" class="nav-link">
-                                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                        <span class="d-none d-sm-block">IP config</span>
+                                    <a href="#profile2" data-toggle="tab" aria-expanded="true" class="nav-link">
+                                        <span class="d-block d-sm-none"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="d-none d-sm-block">IP Config</span> 
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#messages1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                        <span class="d-none d-sm-block">Date config</span>
+                                    <a href="#messages2" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                        <span class="d-block d-sm-none"><i class="fas fa-calendar-week"></i></span>
+                                        <span class="d-none d-sm-block">Date Config</span>  
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#settings1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                    <a href="#settings2" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                        <span class="d-none d-sm-block">EMPTY</span>
+                                        <span class="d-none d-sm-block">Empty</span>  
                                     </a>
                                 </li>
                             </ul>
-
-                            <div class="tab-content">
                             <form action="/configurations/update" method="post">
                                 @csrf
-                                <div role="tabpanel" class="tab-pane fade show active" id="time">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-centered mb-0" id="inline-editable">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>TimeStartCheck</th>
-                                                                    <th>TimeEndCheck</th>
-                                                                    <th>TimeStartCheck</th>
-                                                                    <th>TimeEndCheck</th>
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td><input type="time" class="form-control" id="moreoptions" name="timeStartCheckin" value="{{$configes->timeStartCheckin}}"></td>
-                                                                    <td><input type="time" class="form-control" id="moreoptions" name="timeEndCheckin" value="{{$configes->timeEndCheckin}}"></td>
-                                                                    <td><input type="time" class="form-control" id="moreoptions" name="timeStartCheckout" value="{{$configes->timeStartCheckout}}"></td>
-                                                                    <td><input type="time" class="form-control" id="timepicker2" name="timeEndCheckout" value="{{$configes->timeEndCheckout}}"></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div> <!-- end .table-responsive-->
-                                                </div> <!-- end card-body -->
-                                            </div> <!-- end card -->
-                                        </div> <!-- end col -->
-                                    </div> <!-- end row -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="home2">
+                                    <div class="card-box">
+                                        <table class="tablesaw table mb-0" data-tablesaw-mode="stack">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">#</th>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3"><b>StartCheck-in</b></th>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2"><b>EndCheck-in</b> </th>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1"><b>StartCheck-out </b></th>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4"><b>StartCheck-out </b></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                
+                                                <td>1</td>
+                                                <td><input type="time" class="form-control" id="moreoptions" name="timeStartCheckin" value="{{$configes->timeStartCheckin}}"></td>
+                                                <td><input type="time" class="form-control" id="moreoptions" name="timeEndCheckin" value="{{$configes->timeEndCheckin}}"></td>
+                                                <td><input type="time" class="form-control" id="moreoptions" name="timeStartCheckout" value="{{$configes->timeStartCheckout}}"></td>
+                                                <td><input type="time" class="form-control" id="timepicker2" name="timeEndCheckout" value="{{$configes->timeEndCheckout}}"></td>
+                                            </tr>
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="ip">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table" id="inline-editable">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>IP default</th>
-                                                                    {{-- <th>Salary</th> --}}
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    {{-- <td>{{$configes->ipDefaut}}</td> --}}
-                                                                    <td><input type="text" class="form-control" id="moreoptions" name="ipDefaut" value="{{$configes->ipDefaut}}"></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div> <!-- end .table-responsive-->
-                                                </div> <!-- end card-body -->
-                                            </div> <!-- end card -->
-                                        </div> <!-- end col -->
-                                    </div> <!-- end row -->
+                                <div role="tabpanel" class="tab-pane fade" id="profile2">
+                                    <div class="card-box">
+                                        <table class="tablesaw table mb-0" data-tablesaw-mode="stack">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 10rem"  scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">#</th>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3"><b>Set IP</b> </th>
+                                                
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td ><input type="text" class="form-control" id="moreoptions" name="ipDefaut" value="{{$configes->ipDefaut}}"></td>
+                                                
+                                            </tr>
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="messages1">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-centered mb-0" id="inline-editable">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Current Date Format</th>
-                                                                    <th>Change Date Format</th>
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <input value="{{ $timenow }}" type="timezone" id="meeting-time" name="meeting-time" readonly>
-                                                                    </td>
-{{--                                                                    {{ dd($timenow) }}--}}
-                                                                    @if ($stringFormat == "Y/m/d" )
-                                                                        <td>
-                                                                            <br>
-                                                                            <label for="dateFormat">Choose a format Date:</label>
-                                                                            <select name="dateFormat" id="dateFormat">
-                                                                                <option value="m/d/Y">MM/DD/YYYY</option>
-                                                                                <option value="d/m/Y">DD/MM/YYYY</option>
-                                                                                <option value="Y/d/m">YYYY/DD/MM</option>
-                                                                                {{-- <option value="Y/m/d">YYYY/MM/DD</option> --}}
-
-                                                                            </select>
-                                                                        </td>
-                                                                    @endif
-
-                                                                    @if ($stringFormat == "Y/d/m" )
-                                                                        <td>
-                                                                            <br>
-                                                                            <label for="dateFormat">Choose a format Date:</label>
-                                                                            <select name="dateFormat" id="dateFormat">
-                                                                                <option value="m/d/Y">MM/DD/YYYY</option>
-                                                                                <option value="d/m/Y">DD/MM/YYYY</option>
-{{--                                                                                <option value="Y/d/m">YYYY/DD/MM</option>--}}
-                                                                                 <option value="Y/m/d">YYYY/MM/DD</option>
-                                                                            </select>
-                                                                        </td>
-                                                                    @endif
-
-                                                                    @if ($stringFormat == "d/m/Y" )
-                                                                        <td>
-                                                                            <br>
-                                                                            <label for="dateFormat">Choose a format Date:</label>
-                                                                            <select name="dateFormat" id="dateFormat">
-                                                                                <option value="m/d/Y">MM/DD/YYYY</option>
-{{--                                                                                <option value="d/m/Y">DD/MM/YYYY</option>--}}
-                                                                                <option value="Y/d/m">YYYY/DD/MM</option>
-                                                                                 <option value="Y/m/d">YYYY/MM/DD</option>
-                                                                            </select>
-                                                                        </td>
-                                                                    @endif
-
-                                                                    @if ($stringFormat == "m/d/Y" )
-                                                                        <td>
-                                                                            <br>
-                                                                            <label for="dateFormat">Choose a format Date:</label>
-                                                                            <select name="dateFormat" id="dateFormat">
-{{--                                                                                <option value="m/d/Y">MM/DD/YYYY</option>--}}
-                                                                                <option value="d/m/Y">DD/MM/YYYY</option>
-                                                                                <option value="Y/d/m">YYYY/DD/MM</option>
-                                                                                 <option value="Y/m/d">YYYY/MM/DD</option>
-                                                                            </select>
-                                                                        </td>
-                                                                    @endif
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div> <!-- end .table-responsive-->
-                                                </div> <!-- end card-body -->
-                                            </div> <!-- end card -->
-                                        </div> <!-- end col -->
-                                    </div> <!-- end row -->
+                                <div role="tabpanel" class="tab-pane fade" id="messages2">
+                                    <div class="card-box">
+                                        <table class="tablesaw table mb-0" data-tablesaw-mode="stack">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist"><b>Current Date Format</b> </th>
+                                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3"><b> Change Date Format</b></th>
+                                                
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <tr>
+                                                    <td>
+                                                        <input value="{{ $timenow }}" class="mt-2 form-control" type="timezone" id="meeting-time" name="meeting-time" readonly>
+                                                    </td>
+                                                                                  
+                                                    @if ($stringFormat == "Y/m/d" )
+                                                        <td>
+                                                            <div class="form-group row mt-2">
+                                                                <label for="dateFormat" class="col-md-4 ml-2 col-form-label">Choose a format Date:</label>
+                                                                <div class="col-md-7">
+                                                                    <select name="dateFormat" id="dateFormat" class="form-control">
+                                                                        <option value="m/d/Y">MM/DD/YYYY</option>
+                                                                        <option value="d/m/Y">DD/MM/YYYY</option>
+                                                                        <option value="Y/d/m">YYYY/DD/MM</option>
+                                                                    </select>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    @endif
+                
+                                                    @if ($stringFormat == "Y/d/m" )
+                                                        <td>
+                                                            <div class="form-group row mt-2">
+                                                                <label for="dateFormat" class="col-md-4 ml-2 col-form-label">Choose a format Date:</label>
+                                                                <div class="col-md-7">
+                                                                    <select name="dateFormat" id="dateFormat" class="form-control">
+                                                                        <option value="m/d/Y">MM/DD/YYYY</option>
+                                                                        <option value="d/m/Y">DD/MM/YYYY</option>
+                                                                        <option value="Y/m/d">YYYY/MM/DD</option>
+                                                                    </select>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    @endif
+                
+                                                    @if ($stringFormat == "d/m/Y" )
+                                                        <td>
+                                                            <div class="form-group row mt-2">
+                                                                <label for="dateFormat" class="col-md-4 ml-2 col-form-label">Choose a format Date:</label>
+                                                                <div class="col-md-7">
+                                                                    <select name="dateFormat" id="dateFormat" class="form-control">
+                                                                        <option value="m/d/Y">MM/DD/YYYY</option>
+                                                                        <option value="Y/d/m">YYYY/DD/MM</option>
+                                                                        <option value="Y/m/d">YYYY/MM/DD</option>
+                                                                    </select>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    @endif
+                
+                                                    @if ($stringFormat == "m/d/Y" )
+                                                        <td>
+                                                            <div class="form-group row mt-2">
+                                                                <label for="dateFormat" class="col-md-4 ml-2 col-form-label">Choose a format Date:</label>
+                                                                <div class="col-md-7">
+                                                                    <select name="dateFormat" id="dateFormat" class="form-control">
+                                                                        <option value="d/m/Y">DD/MM/YYYY</option>
+                                                                        <option value="Y/d/m">YYYY/DD/MM</option>
+                                                                        <option value="Y/m/d">YYYY/MM/DD</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            </tr>
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="settings1">
+                                <div role="tabpanel" class="tab-pane fade" id="settings2">
                                     {{'content in here'}}
                                 </div>
-
-                        <input type="submit" class="btn btn-primary" value="Save">
-                            </form>
-                    </div><!-- end row -->
+                            </div>
+                            <div class="row justify-content-center">
+                                <a href="/configurations" class="btn btn-danger btn-rounded width-lg text-center text-white mt-2 mr-2"> Back</a>
+                                <input type="submit" class="btn btn-primary btn-rounded width-lg text-center mt-2" value="Save">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div><!-- end col -->
-        </div>
-        <!-- end row -->
+            </div>
+        </div>             
     </div> <!-- container-fluid -->
 @endsection
 
