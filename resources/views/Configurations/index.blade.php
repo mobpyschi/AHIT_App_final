@@ -12,7 +12,7 @@
 
                     <div class="row">
                         <div class="col-xl-12">
-                            <td><a href="/configurations/edit" type="button" class="btn btn-primary" value="EDIT">Edit</a></td>
+                            <td><a href="/configurations/edit" type="button" class="btn btn-primary btn-rounded width-lg mb-2" value="EDIT">Edit</a></td>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link active">
