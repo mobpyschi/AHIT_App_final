@@ -20,7 +20,8 @@ class CreateConfigurationTable extends Seeder
             'timeStartCheckin'=>'08:00:00',
             'timeEndCheckin'=>'08:15:00',
             'timeStartCheckout'=>'16:50:00',
-            'timeEndCheckout'=>'18:00:00'
+            'timeEndCheckout'=>'18:00:00',
+            'formatDate'=>'d/m/Y'
         ];
         Configuration::create($config);
     }

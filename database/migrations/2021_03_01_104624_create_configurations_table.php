@@ -26,7 +26,9 @@ class CreateConfigurationsTable extends Migration
             // timeStartCheckout = '16:50:00';
             $table->time('timeEndCheckout');
             // timeEndCheckout = '18:00:00';
+            $table->string('formatDate');
             $table->timestamps();
+
         });
     }
 
