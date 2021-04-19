@@ -99,100 +99,125 @@ class FunctionController extends Controller
 
     } /* END FUNCTION */
 
-    /* BEGIN FUNCTION CHECKLOGOUT*/
-    public function logiCheckout(Request $request)
-    {
-        $input = $request->all();
-        //------User by name------
-        $user = User::where('id', Auth::user()->id)->first();
-        /**------GET DATA--------*/
-        $getDay = explode(":", $input['date']);
+   /* BEGIN FUNCTION CHECKLOGOUT*/
+   public function logiCheckout(Request $request)
+   {
+       $input = $request->all();
+       
+       //------User by name------
+       $user = User::where('id', Auth::user()->id)->first();
+       /**------GET DATA--------*/
+       $getDay = explode(":", $input['date']);
 
-        //---String Process---
-        $ipAdress = $request->ip;
+       //---String Process---
+       $ipAdress = $request->ip;
 
-        /**------TIME DEFAUT OF DAY-----*/
-        $config = Configuration::first();
-        $timeStartCheckout = $config->timeStartCheckout;
-        $timeEndCheckout = $config->timeEndCheckout;
-        $ipDefaut = $config->ipDefaut;
 
-        /**-----CHECK CONDITION----*/
+       /**------TIME DEFAUT OF DAY-----*/
+       $config = Configuration::first();
+       $timeStartCheckin = $config->timeStartCheckin;
+       $timeStartCheckout = $config->timeStartCheckout;
+       $timeEndCheckout = $config->timeEndCheckout;
+       $ipDefaut = $config->ipDefaut;
 
-        //------Time work------
+       /**-----CHECK CONDITION----*/
 
-        //------CHECK DAY OF MONTH------
-        $dayNow = date('d');
+       //------Time work------
+       $getIDCheckinTime = HistoryChecks::where('model_id',Auth::user()->id)->max('id');
+       $getCheckinTime = HistoryChecks::where('id',$getIDCheckinTime)->first();
+       $getCheckoutTime = $input['time'];
 
-        $monthNow = date('m');
-        $dayOfWeek = date('l');
+       if ($getCheckinTime >= $timeStartCheckin && $getCheckoutTime < '12:00:00'){
+           
+           $hour = Carbon\Carbon::parse($getCheckoutTime)->diff(Carbon\Carbon::parse($getCheckinTime->checkin_time))->format('%h');
+           $minute = Carbon\Carbon::parse($getCheckoutTime)->diff(Carbon\Carbon::parse($getCheckinTime->checkin_time))->format('%i');
+       }
+       elseif ($getCheckinTime >= '13:00:00' && $getCheckoutTime <= $timeStartCheckout) {
+           $hour = Carbon\Carbon::parse($getCheckoutTime)->diff(Carbon\Carbon::parse($getCheckinTime->checkin_time))->format('%h');
+           $minute = Carbon\Carbon::parse($getCheckoutTime)->diff(Carbon\Carbon::parse($getCheckinTime->checkin_time))->format('%i');
+       }
+       else  {
+           $hour = Carbon\Carbon::parse($getCheckoutTime)->subHours(1)->diff(Carbon\Carbon::parse($getCheckinTime->checkin_time))->format('%h');
+           $minute = Carbon\Carbon::parse($getCheckoutTime)->diff(Carbon\Carbon::parse($getCheckinTime->checkin_time))->format('%i');
+       }
+         
+       $timeWork = $hour.' hour ' . $minute.' minute';
+       
+       //------CHECK DAY OF MONTH------
+       $dayNow = date('d');
 
-        //-----LOCATION----
-        if ($ipAdress == $ipDefaut) {
-            //------CHECK TIME------
-            if ($getDay[0] != "Sunday") {
-                /** Condition to have one work */
+       $monthNow = date('m');
+       $dayOfWeek = date('l');
+       
+       //-----LOCATION----
+       if ($ipAdress == $ipDefaut) {
+           //------CHECK TIME------
+           if ($getDay[0] != "Sunday") {
+               /** Condition to have one work */
 
-                if (Auth::user()->is_check == 1) {
-                    $user->workday++;
-                    $user->is_check = 0;
+               if (Auth::user()->is_check == 1 && $hour >= 4 ) {
+                   $user->workday++;
+                   $user->is_check = 0;
 
-                }
-            } else {
-                return view('home')->with('status', 'Today is sunday , You can go back tomorrow');
-            }
-        }
+               }
+               else{
+                   $user->workday = $user->workday + 0.5;
+                   $user->is_check = 0;
+               }
+           } else {
+               return view('home')->with('status', 'Today is sunday , You can go back tomorrow');
+           }
+       }
 
-        //---------SAVE CHECKWORK--------
-        if ($input['time'] >= $timeStartCheckout && $input['time'] <= $timeEndCheckout) {
-            if ($user->save()) {
-                //id user check-in recrently
-                $idHistoryMax = HistoryChecks::where('model_id', $user->id)->get()->max('id');
-                //get history User to Save
-                $historyUser = HistoryChecks::where('model_id', $user->id)->where('id', $idHistoryMax)->first();
+       //---------SAVE CHECKWORK--------
+       if ($input['time'] >= $timeStartCheckout && $input['time'] <= $timeEndCheckout) {
+           if ($user->save()) {
+               //id user check-in recrently
+               $idHistoryMax = HistoryChecks::where('model_id', $user->id)->get()->max('id');
+               //get history User to Save
+               $historyUser = HistoryChecks::where('model_id', $user->id)->where('id', $idHistoryMax)->first();
 
-                $historyUser->checkout_time = '17:00:00';
-                $historyUser->description = null;
-                $historyUser->OT_time = null;
-                $historyUser->save();
-                return redirect('/home')->with('status', 'Checkout Success');
-            }
-            return redirect('/')->with('status', 'Checked Fail');
+               $historyUser->checkout_time = '17:00:00';
+               $historyUser->description = null;
+               $historyUser->OT_time = null;
+               $historyUser->save();
+               return redirect('/home')->with('status', 'Checkout Success');
+           }
+           return redirect('/')->with('status', 'Checked Fail');
 
-        } else {
-            if ($input['time'] <= $timeStartCheckout) {
-                if ($user->save()) {
-                    //id user check-in recrently
-                    $idHistoryMax = HistoryChecks::where('model_id', $user->id)->get()->max('id');
-                    //get history User to Save
-                    $historyUser = HistoryChecks::where('model_id', $user->id)->where('id', $idHistoryMax)->first();
+       } else {
+           if ($input['time'] <= $timeStartCheckout) {
+               if ($user->save()) {
+                   //id user check-in recrently
+                   $idHistoryMax = HistoryChecks::where('model_id', $user->id)->get()->max('id');
+                   //get history User to Save
+                   $historyUser = HistoryChecks::where('model_id', $user->id)->where('id', $idHistoryMax)->first();
 
-                    $historyUser->checkout_time = $input['time'];
-                    $historyUser->description = $input['descript'];
-                    $historyUser->OT_time = null;
-                    $historyUser->save();
-                    return redirect('/home')->with('status', 'Checkout Success');
-                }
-                return redirect('/')->with('status', 'Checked Fail');
-            } else {
-                if ($user->save()) {
-                    //id user check-in recrently
-                    $idHistoryMax = HistoryChecks::where('model_id', $user->id)->get()->max('id');
-                    //get history User to Save
-                    $historyUser = HistoryChecks::where('model_id', $user->id)->where('id', $idHistoryMax)->first();
+                   $historyUser->checkout_time = $input['time'];
+                   $historyUser->description = $input['descript'];
+                   $historyUser->OT_time = null;
+                   $historyUser->save();
+                   return redirect('/home')->with('status', 'Checkout Success');
+               }
+               return redirect('/')->with('status', 'Checked Fail');
+           } else {
+               if ($user->save()) {
+                   //id user check-in recrently
+                   $idHistoryMax = HistoryChecks::where('model_id', $user->id)->get()->max('id');
+                   //get history User to Save
+                   $historyUser = HistoryChecks::where('model_id', $user->id)->where('id', $idHistoryMax)->first();
 
-                    $historyUser->checkout_time = $config->timeStartCheckout;
-                    $historyUser->description = $input['descript'];
-                    $historyUser->OT_time = Carbon\Carbon::parse($input['time'])->diff(Carbon\Carbon::parse($config->timeEndCheckout))->format('%h:%i');
-                    $historyUser->save();
-                    return redirect('/home')->with('status', 'Checkout Success');
-                }
-                return redirect('/')->with('status', 'Checked Fail');
-            }
-        }
+                   $historyUser->checkout_time = $config->timeStartCheckout;
+                   $historyUser->description = $input['descript'];
+                   $historyUser->OT_time = Carbon\Carbon::parse($input['time'])->diff(Carbon\Carbon::parse($config->timeEndCheckout))->format('%h:%i');
+                   $historyUser->save();
+                   return redirect('/home')->with('status', 'Checkout Success');
+               }
+               return redirect('/')->with('status', 'Checked Fail');
+           }
+       }
 
-    } /* END FUNCTION */
-
+   } 
     /**
      * mark Notification read_at.
      *

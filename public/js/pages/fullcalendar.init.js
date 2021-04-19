@@ -23,7 +23,7 @@ $(function() {
         views: {
             month: {
                 // name of view
-                titleFormat: "YYYY, MM, DD"
+                titleFormat: " MM - YYYY"
                 // other view-specific options here
             }
         },

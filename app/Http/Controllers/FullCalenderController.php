@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
+use DB;
 
 class FullCalenderController extends Controller
 {
@@ -63,5 +64,15 @@ class FullCalenderController extends Controller
                 console('toang roi ong giao oi');
                 break;
         }
+    }
+    public function update(Request $request)
+    {
+        $input = $request->all();
+        $className = 'bg-'.$input['category-color'];
+        $affected = DB::table('color_events')
+              ->where('className', $className)
+              ->update(['name' => $input['category-name']]);
+        return redirect()->route('calendar')
+                        ->with('success','Product updated successfully');
     }
 }

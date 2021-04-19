@@ -207,11 +207,15 @@
                                         </tr>
                                         <tr>
                                             <th scope="row" ><span class="mdi mdi-cake"> Date of birth</span></th>
-                                            <td>{{ date('d/m/Y ', strtotime($item->Date_of_birth)) }}</td>
+                                            <td>
+                                                {{-- {{ date('d/m/Y ', strtotime($item->Date_of_birth)) }} --}}
+                                                {{ \Carbon\Carbon::parse($item->Date_of_birth)->format($formatDates) }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row"><i class="fas fa-briefcase"></i> Start to work</th>
-                                            <td>{{ date('d/m/Y ', strtotime($item->Work_start)) }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->Work_start)->format($formatDates) }}</td>
+                                            
                                         </tr>
                                         <tr>
                                             <th scope="row"><i class="fas fa-briefcase"></i> Quit job</th>

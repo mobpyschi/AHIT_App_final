@@ -35,6 +35,8 @@ class HomeController extends Controller
     {
         if (Auth::user()->getRoleNames()[0] != 'Admin') {
             $getUser = DB::table('users')->where('id', Auth::user()->id)->get();
+            
+            
             foreach ($getUser as $key => $value) {
                 $id = $value->id;
             }
@@ -113,6 +115,10 @@ class HomeController extends Controller
             foreach ($getUser as $key => $value) {
                 $id = $value->id;
             }
+            $getFormatDate = Configuration::all();
+            foreach ($getFormatDate as $key => $value) {
+                $formatDates = $value->formatDate;
+            }
             $checkTask = DB::table('tasks')
                         ->join('statuses','tasks.status_id','=','statuses.id')
                         ->select('tasks.*','statuses.name AS namestatus')
@@ -163,13 +169,16 @@ class HomeController extends Controller
             dd($countProjectUnfinished);
             //$countUserName = (User::pluck('name','name')->count()) - 1;//trừ user admin
             return view('home', compact('countRole', 'checkTask', 'countDepartment', 'checklog', 'configs', 'projects', 'users', 'countUserNames',
-             'countProjectNames', 'countProjectUnfinished', 'countProjectProgress', 'countProjectDone','detailUsers','taskDone','taskDue'));
+             'countProjectNames', 'countProjectUnfinished', 'countProjectProgress', 'countProjectDone','detailUsers','taskDone','taskDue','formatDates'));
 
         
         }
         else {
             $checklog = Auth::user()->history()->latest()->paginate(5);
-
+            $getFormatDate = Configuration::all();
+            foreach ($getFormatDate as $key => $value) {
+                $formatDates = $value->formatDate;
+            }
             $checkTask = DB::table('tasks')->get();
             $configs = Configuration::first();
             $projects = DB::table('projects')
@@ -201,7 +210,7 @@ class HomeController extends Controller
 
             //$countUserName = (User::pluck('name','name')->count()) - 1;//trừ user admin
             return view('home', compact('countRole', 'checkTask', 'countDepartment', 'checklog', 'configs', 'projects', 'users', 'countUserNames',
-             'countProjectNames', 'countProjectUnfinished', 'countProjectProgress', 'countProjectDone','detailUsers','taskDone','taskDue'));
+             'countProjectNames', 'countProjectUnfinished', 'countProjectProgress', 'countProjectDone','detailUsers','taskDone','taskDue','formatDates'));
         }
 
     }

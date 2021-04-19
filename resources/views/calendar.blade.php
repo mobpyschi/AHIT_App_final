@@ -44,15 +44,14 @@
                 <div class="col-lg-2">
                     <div class="widget">
                         <div class="widget-body">
-                            {{-- <a href="#" data-toggle="modal" data-target="#add-category"
+                            <a href="#" data-toggle="modal" data-target="#add-category"
                                         class="btn btn-lg btn-success font-16 btn-block waves-effect waves-light">
                                         <i class="fa fa-plus mr-1"></i> Create New
-                                    </a> --}}
+                                    </a>
                             <h4>Note :</h4>
                             <div id="external-events" class="mt-3">
                                 <div class="external-event bg-primary" data-class="bg-primary">
-                                    <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>New Theme
-                                    Release
+                                    <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>
                                 </div>
                                 <div class="external-event bg-pink" data-class="bg-pink">
                                     <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>My Event
@@ -116,12 +115,13 @@
                 <div class="modal fade none-border" id="add-category">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                        <form action="/calendar/create" method="GET">
                             <div class="modal-header">
                                 <h4 class="modal-title mt-0"><strong>Add a category </strong></h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <form role="form">
+                                
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label class="control-label">Category Name</label>
@@ -142,13 +142,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                </form>
+                                
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category"
-                                    data-dismiss="modal">Save</button>
+                                <button type="submit" class="btn btn-danger waves-effect waves-light save-category">Save</button>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div><!-- END MODAL -->
