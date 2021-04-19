@@ -75,8 +75,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/calendar1', function () {
     //     return view('calendar');
     // });
-    Route::get('/calendar', [FullCalenderController::class, 'index']);
+    Route::get('/calendar', [FullCalenderController::class, 'index'])->name('calendar');
     Route::post('/calenderAjax', [FullCalenderController::class, 'ajax']);
+    Route::get('/calendar/create', [FullCalenderController::class, 'update']);
 
     Route::get('/apps-chat', function () {
         return view('apps-chat');

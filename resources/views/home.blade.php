@@ -339,8 +339,8 @@
 
         <div class="row">
             <div class="col-xl-12">
-                <div class="card-box">
-                    <h4 class="header-title mt-0 mb-3">History Checklog Table</h4>
+                <div class="card-box text-light bg-warning">
+                    <h4 class="header-title text-light mt-0 mb-3">History Checklog Table</h4>
                     
                         <table class="tablesaw table mb-0" data-tablesaw-sortable data-tablesaw-sortable-switch>
                             <thead>
@@ -410,13 +410,13 @@
             </div><!-- end col -->
 
             <div class="col-xl-12">
-                <div class="card-box">
+                <div class="card-box bg-secondary text-dark">
                     <h3><p class=" header-title mt-0 mb-3 ">
                         Latest Projects
                     </p></h3>
 
-                    <table class="tablesaw table mb-0" data-tablesaw-sortable data-tablesaw-sortable-switch >
-                        <thead>
+                    <table class="tablesaw text-dark table mb-0" data-tablesaw-sortable data-tablesaw-sortable-switch >
+                        <thead >
                             <tr>
                                 <th  style="background-color:rgb(155, 155, 155);color:white" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
                                     data-tablesaw-priority="3">Id</th>
@@ -437,8 +437,8 @@
                                 <tr>
                                     <td style="background-color:rgb(155, 155, 155);color:white"><b>{{ $project->id }}</b></td>
                                     <td>{{ $project->name }}</td>
-                                    <td>{{ $project->start }}</td>
-                                    <td>{{ $project->end }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($project->start)->format($formatDates.' h:m:s') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($project->end)->format($formatDates.' h:m:s') }}</td>
                                     @if($project->status == 'InProgress')
                                             <td><span class="badge badge-primary">{{ $project->status }}</span></td>
                                             @elseif($project->status == 'Done')
@@ -463,7 +463,7 @@
         <!-- end row -->
         <div class="row">
             <div class="col-xl-12">
-                <div class="card-box">
+                <div class="card-box bg-info">
                     <h3><p class=" header-title mt-0 mb-3 ">
                         Latest Tasks
                     </p></h3>
@@ -490,8 +490,8 @@
                                 <tr>
                                     <td style="background-color:rgb(155, 155, 155);color:white">{{ $task->id }}</td>
                                     <td>{{ $task->name }}</td>
-                                    <td>{{ $task->start }}</td>
-                                    <td>{{ $task->end }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($task->start)->format($formatDates.' h:m:s') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($task->end)->format($formatDates.' h:m:s') }}</td>
                                     @if($task->namestatus == 'overDue')
                                     <td><span class="badge badge-danger">{{ $task->namestatus }}</span></td>
                                     @elseif($task->namestatus == 'InProgress')
@@ -510,7 +510,7 @@
                 </div>
             </div><!-- end col -->
             <div class="col-xl-6">
-                <div class="card-box">
+                <div class="card-box text-dark">
                     <h3><p class=" header-title mt-0 mb-3 ">
                         Done Tasks
                     </p></h3>
@@ -537,8 +537,8 @@
                                 <tr>
                                     <td style="background-color:rgb(155, 155, 155);color:white">{{ $task->id }}</td>
                                     <td>{{ $task->name }}</td>
-                                    <td>{{ $task->start }}</td>
-                                    <td>{{ $task->end }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($task->start)->format($formatDates.' h:m:s') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($task->end)->format($formatDates.' h:m:s') }}</td>
                                     @if($task->namestatus == 'overDue')
                                     <td><span class="badge badge-danger">{{ $task->namestatus }}</span></td>
                                     @elseif($task->namestatus == 'InProgress')
@@ -557,7 +557,7 @@
                 </div>
             </div><!-- end col -->
             <div class="col-xl-6">
-                <div class="card-box">
+                <div class="card-box bg-danger text-dark">
                     <h3><p class=" header-title mt-0 mb-3 ">
                         OverDue Tasks
                     </p></h3>
@@ -583,8 +583,8 @@
                                 <tr>
                                     <td style="background-color:rgb(155, 155, 155);color:white">{{ $task->id }}</td>
                                     <td>{{ $task->name }}</td>
-                                    <td>{{ $task->start }}</td>
-                                    <td>{{ $task->end }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($task->start)->format($formatDates.' h:m:s') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($task->end)->format($formatDates.' h:m:s') }}</td>
                                     @if($task->namestatus == 'overDue')
                                     <td><span class="badge badge-danger">{{ $task->namestatus }}</span></td>
                                     @elseif($task->namestatus == 'InProgress')
@@ -709,8 +709,8 @@
                                     <tr>
                                         <td style="background-color:rgb(155, 155, 155);color:white"><b>{{ $project->id }}</b></td>
                                         <td>{{ $project->name }}</td>
-                                        <td>{{ $project->start }}</td>
-                                        <td>{{ $project->end }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($project->start)->format($formatDates.' h:m:s') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($project->end)->format($formatDates.' h:m:s') }}</td>
                                         @if($project->status == 'InProgress')
                                                 <td><span class="badge badge-primary">{{ $project->status }}</span></td>
                                                 @elseif($project->status == 'Done')
@@ -776,8 +776,8 @@
                                         <td>{{ $key++}}</td>
                                         <td>{{ $task->name }}</td>
                                         <td>{{ $task->nameProject }}</td>
-                                        <td>{{ $task->start }}</td>
-                                        <td>{{ $task->end }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($task->start)->format($formatDates.' h:m:s') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($task->end)->format($formatDates.' h:m:s') }}</td>
                                         @if($task->status == 'InProgress')
                                                 <td><span class="badge badge-primary">{{ dd($task->status) }}</span></td>
                                                 @elseif($task->status == 'Done')

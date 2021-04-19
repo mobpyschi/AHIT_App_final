@@ -18,7 +18,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('Name');
             $table->string('Email')->unique();
             $table->string('Sex')->nullable();
-            $table->dateTime('Date of birth')->nullable();
+            $table->dateTime('Date_of_birth')->nullable();
             $table->dateTime('Work_start')->nullable();
             $table->dateTime('Work_end')->nullable();
             $table->string('Department')->nullable();

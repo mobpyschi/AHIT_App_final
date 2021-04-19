@@ -180,7 +180,7 @@
                         </div> --}}
 
                         <!-- item-->
-                        <a href="/profile" class="dropdown-item notify-item">
+                        <a href="/profiles" class="dropdown-item notify-item">
                             <i class="fe-user"></i>
                             <span>My Account</span>
                         </a>
