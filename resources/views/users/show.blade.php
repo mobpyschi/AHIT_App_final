@@ -69,7 +69,7 @@
                                             </button>
                                             <h4 class="custom-modal-title">Update Information</h4>
                                             <div class="col-xl-12">
-                                                <form action="{{route('updateinfo',Auth::user()->id)}}" class="form-horizontal group-border-dashed"  style="overflow-y: scroll" method="POST">
+                                                <form action="{{route('updateinfo',$item->user_id)}}" class="form-horizontal group-border-dashed"  style="overflow-y: scroll" method="POST">
                                                     @csrf
                                                     <div class="form-group row mt-3">
                                                         <label class="col-sm-3 col-form-label">Full Name</label>

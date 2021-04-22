@@ -25,7 +25,7 @@ class ProfileController extends Controller
             $user = Auth::user();
             $user->avatar = $filename;
             $user->save();
-            return view('profile',compact('detailUser'));
+            return view('profiles.index',compact('detailUser'));
         }
         return 'false';
     }
@@ -41,10 +41,19 @@ class ProfileController extends Controller
             'Phone' => 'numeric',
             ]);
             $input = $request->all();
-            // dd($input);
-            $detailUser = UserDetail::where('user_id',$id)->first();
+            // dd($id);
+            if (Auth::user()->getRoleNames()[0] != 'Admin') {
+                $detailUser = UserDetail::where('user_id',$id)->first();
             
             $detailUser->update($input);
-            return redirect()->route('profiles.update')->with('success', 'Product updated successfully');
+            return redirect()->route('profiles.update')->with('success', 'Updated information successfully');
+            }
+            else{
+                $detailUser = UserDetail::where('user_id',$id)->first();
+            
+                $detailUser->update($input);
+                return redirect()->route('users.index')->with('success', 'Updated information  successfully');
+            }
+            
     }
 }

@@ -66,7 +66,7 @@
             {{-- form lam viec --}}
             <p><b>Employee's </b>session :</p>
             <form action="/tasks/{{ $tasksUser->id }}/submit" method="post">
-                @csrf
+                {{ csrf_field() }}
                 <div class="row mb-3">
 
                     <div class="col-md-12 ">
@@ -82,15 +82,19 @@
 
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <div class="custom-file">
+                            {{-- <div class="custom-file">
                                 <input type="file" name='filesubmit' class="custom-file-input"
                                     id="customFile{{ $tasksUser->id }}">
                                 <label class="custom-file-label" for="customFile">Choose
                                     file
                                 </label>
-                            </div>
+                            </div> --}}
+                            <div>
+                                <label  for="customFile">Choose file to upload</label>
+                                <input type="file"  id="customFile{{ $tasksUser->id }}" name="filesubmit" multiple>
+                              </div>
                         </div>
-
+                        
                         <div class="col-md-8">
                             <label for="sprogress">Progress : {{ $tasksUser->progress }}%</label>
                             <input type="range" name="progress" class="form-control" min="0" max="100" value="0">

@@ -79,22 +79,54 @@ class TaskController extends Controller
         $validate = $request->validate([
             'note' => 'required',
             'progress' => 'required',
+            
         ]);
         $input = $request->all();
+        
         if ($input['filesubmit'] == null && $input['note'] == null) {
             return redirect()->back()->with('errors' , 'no input in note and progress');
         }
-        $input['filesubmit'] = null;
-        $input['status_id'] = 3;
-        $tasks = Task::find($id);
-        $tasks->update($input);
+        dd($request->hasFile('filesubmit'));
+        if ($request->hasFile('filesubmit')) {
+            $file = $request->filesubmit;
+            
 
-        //make notification
-        $projId = Project::where('id', $tasks->project_id)->first()->assign;
-        Task::sendNotify($projId, $tasks);
+            //Lấy Tên files
+            echo 'Tên Files: ' . $file->getClientOriginalName();
+            echo '<br/>';
 
-        // $tasks->update(['status_id' => 3]);
-        return redirect()->back()->with('taskSubmit', 'You already submited ');
+            //Lấy Đuôi File
+            echo 'Đuôi file: ' . $file->getClientOriginalExtension();
+            echo '<br/>';
+
+            //Lấy đường dẫn tạm thời của file
+            echo 'Đường dẫn tạm: ' . $file->getRealPath();
+            echo '<br/>';
+
+            //Lấy kích cỡ của file đơn vị tính theo bytes
+            echo 'Kích cỡ file: ' . $file->getSize();
+            echo '<br/>';
+
+            //Lấy kiểu file
+            echo 'Kiểu files: ' . $file->getMimeType();
+            return true;
+        }
+        else{
+            return false;
+        }
+        // $file = $request->hasFile('filesubmit');
+        // dd()
+        // $input['filesubmit'] = null;
+        // $input['status_id'] = 3;
+        // $tasks = Task::find($id);
+        // $tasks->update($input);
+
+        // //make notification
+        // $projId = Project::where('id', $tasks->project_id)->first()->assign;
+        // Task::sendNotify($projId, $tasks);
+
+        // // $tasks->update(['status_id' => 3]);
+        // return redirect()->back()->with('taskSubmit', 'You already submited ');
     }
 
     /**

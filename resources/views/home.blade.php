@@ -663,11 +663,11 @@
                                             </h5>
                                         </li>
                                         <li class="list-inline-item float-left">
-                                            <h5 style="color: #16b31e;"><i class="fa fa-circle mr-1"></i>Progress project
+                                            <h5 style="color: #a08cf7;"><i class="fa fa-circle mr-1"></i>Progress project
                                             </h5>
                                         </li>
                                         <li class="list-inline-item float-left">
-                                            <h5 style="color: #246118;"><i class="fa fa-circle mr-1"></i>Done project</h5>
+                                            <h5 style="color: #31e10d;"><i class="fa fa-circle mr-1"></i>Done project</h5>
                                         </li>
                                     </ul>
 

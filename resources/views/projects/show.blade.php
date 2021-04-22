@@ -41,6 +41,8 @@
             </div>
         </div>
 
+        {{-- Only manager and admin --}}
+        @if (Auth::user()->id === $project->assign || Auth::user()->getRoleNames()[0] === 'Admin')
         <div class="row">
             <div class="col-md-12">
                 <div class="card-box task-detail">
@@ -128,6 +130,7 @@
                 </div>
             </div>
         </div>{{-- end row --}}
+        @endif
 
         @if (Auth::user()->id === $project->assign || Auth::user()->getRoleNames()[0] === 'Admin')
             <div class="row">
